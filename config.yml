@@ -1,0 +1,10 @@
+s3:
+  bucket: "iask-me-demo-bucket"
+  region: "eu-west-1"
+
+external_db:
+  service_url: "https://other-repo.example.com/api/v1/query"
+
+app:
+  name: "iask_me"
+  version: "0.1.0"

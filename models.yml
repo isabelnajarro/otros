@@ -1,0 +1,5 @@
+model:
+  name: "gpt-4o-mini"
+  provider: "openai"
+  purpose: "Resumir cambios, generación de texto contextual y embeddings"
+  note: "Demo: este archivo indica el modelo principal utilizado por el proyecto."

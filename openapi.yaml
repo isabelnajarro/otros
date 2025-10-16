@@ -1,0 +1,114 @@
+openapi: 3.0.3
+info:
+  title: iask_me API (demo)
+  version: "0.1.0"
+  description: >
+    API demo para el proyecto iask_me. Contiene endpoints para buscar, listar items,
+    subir datos (S3), información del modelo de IA y estadísticas (consulta a DB externa).
+  x-project-model: "gpt-4o-mini"
+servers:
+  - url: http://localhost:8080
+paths:
+  /health:
+    get:
+      summary: Estado del servicio
+      responses:
+        '200':
+          description: OK
+  /search:
+    post:
+      summary: Buscar en el índice del proyecto (usa IA para ranking)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Resultados de búsqueda
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+  /items:
+    get:
+      summary: Listar items (paginado)
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lista de items
+    post:
+      summary: Crear item (sube datos a S3)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemCreate'
+      responses:
+        '201':
+          description: Item creado
+  /models/info:
+    get:
+      summary: Información del modelo de IA usado por el proyecto
+      responses:
+        '200':
+          description: Info del modelo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelInfo'
+  /admin/stats:
+    get:
+      summary: Estadísticas administrativas (consulta BBDD externa)
+      responses:
+        '200':
+          description: Estadísticas
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    SearchRequest:
+      type: object
+      properties:
+        query:
+          type: string
+        top_k:
+          type: integer
+    SearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              score:
+                type: number
+              snippet:
+                type: string
+    ItemCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        payload:
+          type: string
+    ModelInfo:
+      type: object
+      properties:
+        model_name:
+          type: string
+        provider:
+          type: string
+        purpose:
+          type: string

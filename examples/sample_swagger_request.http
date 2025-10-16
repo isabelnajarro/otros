@@ -1,0 +1,16 @@
+# GET health
+GET http://localhost:8080/health
+
+### Search
+POST http://localhost:8080/search
+Content-Type: application/json
+
+{
+  "query":"¿qué hace el proyecto?"
+}
+
+### Model info
+GET http://localhost:8080/models/info
+
+### Admin stats
+GET http://localhost:8080/admin/stats
