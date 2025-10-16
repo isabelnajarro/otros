@@ -1,6 +1,4 @@
-# iask_me-demo
-
-Repo demo que simula el servicio `iask_me` para integrarlo con el orchestrator.
+# Project AI
 
 Características:
 - API con 5 endpoints descritos en `openapi.yaml`.
@@ -9,4 +7,3 @@ Características:
 - Incluye endpoint `/openapi.yaml` que sirve la especificación en caliente (útil para que el orchestrator la lea por URL).
 - Contiene `Dockerfile` y `Makefile` para levantar la demo rápidamente.
 
-Nota: este repo es **solo demo**; puedes construir y ejecutar el contenedor localmente para que tu orchestrator lo consulte.
